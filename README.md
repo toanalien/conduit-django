@@ -7,7 +7,7 @@
 3. `cd` into `conduit-django`: `cd conduit-django`.
 4. Install [virtualenv](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/#installing-virtualenv).
 5. Create a new virtualenv called "ENV": `virtualenv ENV`.
-6. Set the local virtualenv to "conduit": `source ENV/bin/activate`.
+6. Set the local virtualenv to "ENV": `source ENV/bin/activate`.
 
 If all went well then your command line prompt should now start with `(ENV)`.
 
