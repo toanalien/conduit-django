@@ -25,12 +25,15 @@ class UserSerializer(serializers.ModelSerializer):
     # so we set `write_only=True`.
     profile = ProfileSerializer(write_only=True)
 
+    bio = serializers.CharField(source='profile.bio', read_only=True)
+    image = serializers.CharField(source='profile.image', read_only=True)
+
     class Meta:
         model = User
         fields = (
-            'email', 'username', 'password', 'token', 'profile',
-            'bio', 'image'
-        )
+            'email', 'username', 'password', 'token', 'profile', 'bio',
+            'image'
+            )
 
         # The `read_only_fields` option is an alternative for explicitly
         # specifying the field with `read_only=True` like we did for password
