@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.DS_Store
 
 # C extensions
 *.so
@@ -93,3 +94,7 @@ db.sqlite3
 
 # Test code file
 __test__.py
+
+# VSCode file
+settings.json
+launch.json

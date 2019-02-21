@@ -12,8 +12,8 @@ class JWTAuthentication(authentication.BaseAuthentication):
 
     def authenticate(self, request):
         """
-        The `authenticate` method is called on every request, regardless of
-        whether the endpoint requires authentication. 
+        The `authenticate` method is called on every request regardless of
+        whether the endpoint requires authentication.
 
         `authenticate` has two possible return values:
 
@@ -22,18 +22,20 @@ class JWTAuthentication(authentication.BaseAuthentication):
                     this is when the request does not include a token in the
                     headers.
 
-        2) `(user, token)` - We return a user/token combination when 
-                             authentication was successful.
+        2) `(user, token)` - We return a user/token combination when
+                             authentication is successful.
 
-        If neither of these two cases were met, that means there was an error.
-        In the event of an error, we do not return anything. We simple raise
-        the `AuthenticationFailed` exception and let Django REST Framework
-        handle the rest.
+                            If neither case is met, that means there's an error
+                            and we do not return anything.
+                            We simple raise the `AuthenticationFailed`
+                            exception and let Django REST Framework
+                            handle the rest.
         """
         request.user = None
 
         # `auth_header` should be an array with two elements: 1) the name of
-        # the authentication header (in this case, "Token") and 2) the JWT 
+        # the authentication header (in this case, "Token") and 2) the JWT
+
         # that we should authenticate against.
         auth_header = authentication.get_authorization_header(request).split()
         auth_header_prefix = self.authentication_header_prefix.lower()
@@ -47,8 +49,8 @@ class JWTAuthentication(authentication.BaseAuthentication):
             return None
 
         elif len(auth_header) > 2:
-            # Invalid token header. Token string should not contain spaces. Do
-            # not attempt to authenticate.
+            # Invalid token header. The Token string should not contain spaces.
+            # Do not attempt to authenticate.
             return None
 
         # The JWT library we're using can't handle the `byte` type, which is
