@@ -1,18 +1,24 @@
-from django.conf.urls import include, url
+from django.urls import include, path
 
 from rest_framework.routers import DefaultRouter
 
-from .views import ArticleViewSet, CommentsListCreateAPIView, CommentsDestroyAPIView
+from .views import (
+    ArticleViewSet, CommentsListCreateAPIView, CommentsDestroyAPIView
+    )
 
 router = DefaultRouter(trailing_slash=False)
 router.register(r'articles', ArticleViewSet)
 
+app_name = 'articles'
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    path('', include(router.urls)),
 
-    url(r'^articles/(?P<article_slug>[-\w]+)/comments/?$', 
-        CommentsListCreateAPIView.as_view()),
-
-    url(r'^articles/(?P<article_slug>[-\w]+)/comments/(?P<comment_pk>[\d]+)/?$',
-        CommentsDestroyAPIView.as_view()),
+    path(
+        'articles/<slug:article_slug>/comments',
+        CommentsListCreateAPIView.as_view()
+        ),
+    path(
+        'articles/<slug:article_slug>/comments/<int:comment_pk>',
+        CommentsDestroyAPIView.as_view()
+        ),
 ]

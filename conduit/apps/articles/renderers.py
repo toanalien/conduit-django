@@ -9,4 +9,3 @@ class ArticleJSONRenderer(ConduitJSONRenderer):
 class CommentJSONRenderer(ConduitJSONRenderer):
     object_label = 'comment'
     object_label_plural = 'comments'
-    
