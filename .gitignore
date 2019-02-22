@@ -93,3 +93,7 @@ db.sqlite3
 
 # Test code file
 __test__.py
+
+# VS Code files
+launch.json
+settings.json 
