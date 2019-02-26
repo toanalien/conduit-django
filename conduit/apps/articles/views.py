@@ -76,7 +76,7 @@ class ArticleViewSet(mixins.CreateModelMixin,
             raise NotFound('An article with this slug does not exist.')
 
         serializer = self.serializer_class(
-            serializer_instance, 
+            serializer_instance,
             context=serializer_context
         )
 
@@ -88,13 +88,13 @@ class ArticleViewSet(mixins.CreateModelMixin,
             serializer_instance = self.queryset.get(slug=slug)
         except Article.DoesNotExist:
             raise NotFound('An article with this slug does not exist.')
-            
+
         serializer_data = request.data.get('article', {})
 
         serializer = self.serializer_class(
-            serializer_instance, 
+            serializer_instance,
             context=serializer_context,
-            data=serializer_data, 
+            data=serializer_data,
             partial=True
         )
         serializer.is_valid(raise_exception=True)
@@ -228,4 +228,4 @@ class TagListAPIView(generics.ListAPIView):
         return Response({
             'tags': serializer.data
         }, status=status.HTTP_200_OK)
-        
+

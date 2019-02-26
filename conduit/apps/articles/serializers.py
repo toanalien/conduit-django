@@ -56,7 +56,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         if request is None:
             return False
 
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             return False
 
         return request.user.profile.has_favorited(instance)
@@ -108,37 +108,6 @@ class CommentSerializer(serializers.ModelSerializer):
 
     def get_favorites_count(self, instance):
         return instance.favorited_by.count()
-
-    def get_updated_at(self, instance):
-        return instance.updated_at.isoformat()
-
-
-class CommentSerializer(serializers.ModelSerializer):
-    author = ProfileSerializer(required=False)
-
-    createdAt = serializers.SerializerMethodField(method_name='get_created_at')
-    updatedAt = serializers.SerializerMethodField(method_name='get_updated_at')
-
-    class Meta:
-        model = Comment
-        fields = (
-            'id',
-            'author',
-            'body',
-            'createdAt',
-            'updatedAt',
-        )
-
-    def create(self, validated_data):
-        article = self.context['article']
-        author = self.context['author']
-
-        return Comment.objects.create(
-            author=author, article=article, **validated_data
-        )
-
-    def get_created_at(self, instance):
-        return instance.created_at.isoformat()
 
     def get_updated_at(self, instance):
         return instance.updated_at.isoformat()
